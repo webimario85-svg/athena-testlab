@@ -116,7 +116,10 @@ def emit(manifest: dict, outcomes: list[dict], output: Path, root: Path, *,
             # The result is strictly the named observation, not protocol compatibility.
             case = {
                 "schema_version": "1", "case_id": identifier,
-                "scenario": test["kind"], "client_sha256": hashes[0],
+                "scenario": (("rathena-account-rejected" if test["observation"] == "account-rejection-confirmed"
+                             else "rathena-login-accepted" if test["observation"] == "login-accept-packet-observed"
+                             else "rathena-login-probe") if test["kind"] == "rathena-login"
+                             else test["kind"]), "client_sha256": hashes[0],
                 "server_build_sha256": hashes[1],
                 "status": "pass" if test["passed"] else "fail",
                 "observed_at": now.date().isoformat(),

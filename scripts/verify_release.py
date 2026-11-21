@@ -61,7 +61,8 @@ def main():
     with zipfile.ZipFile(wheels[0]) as z:
         contents = z.namelist()
         for suffix in ("athenatestlab/cli.py", "athenatestlab/runner.py",
-                       "athenatestlab/evidence.py", ".dist-info/entry_points.txt"):
+                       "athenatestlab/evidence.py", "athenatestlab/protocol.py",
+                       "athenatestlab/attestation.py", ".dist-info/entry_points.txt"):
             if not any(name.endswith(suffix) for name in contents):
                 raise SystemExit("WHEEL_CONTENTS=FAIL " + suffix)
     print("WHEEL_CONTENTS=PASS")

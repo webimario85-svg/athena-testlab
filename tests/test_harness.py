@@ -226,7 +226,7 @@ class AthenaTests(unittest.TestCase):
         self.assertEqual(case["server_build_sha256"], hashlib.sha256(server.read_bytes()).hexdigest())
         self.assertEqual(case["log_sha256"], hashlib.sha256(
             (self.output / "session.log").read_bytes()).hexdigest())
-        self.assertEqual(case["runner"], "athena-testlab/0.1.0")
+        self.assertEqual(case["runner"], "athena-testlab/0.2.0")
 
     def test_case_without_binaries_is_not_fabricated(self):
         port, _ = self.server()

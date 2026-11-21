@@ -12,7 +12,7 @@ MAX_TESTS = 64
 ID = re.compile(r"^[a-z][a-z0-9._-]{2,63}$")
 HEX = re.compile(r"^(?:[0-9a-fA-F]{2}){0,256}$")
 HOSTS = {"127.0.0.1", "::1"}
-KINDS = {"tcp-open", "tcp-exchange", "process-exit"}
+KINDS = {"tcp-open", "tcp-exchange", "process-exit", "rathena-login"}
 
 
 class ManifestError(ValueError):
@@ -86,6 +86,19 @@ def _test(raw: object) -> dict:
                 raise ManifestError("invalid bounded hex payload")
         if not raw["expect_hex"]:
             raise ManifestError("expected bytes must not be empty")
+    elif kind == "rathena-login":
+        _keys(raw, {"id", "kind", "host", "port", "timeout_ms",
+                    "client_version", "expect"})
+        if not isinstance(raw["host"], str) or raw["host"] not in HOSTS:
+            raise ManifestError("login probe host must be loopback")
+        _port(raw["port"])
+        version = raw["client_version"]
+        if type(version) is not int or not 20000101 <= version <= 20991231:
+            raise ManifestError("client_version must be a YYYYMMDD-like integer")
+        if not isinstance(raw["expect"], str) or raw["expect"] not in (
+            "account-rejected", "accepted"
+        ):
+            raise ManifestError("invalid login expectation")
     elif kind == "process-exit":
         _keys(raw, {"id", "kind", "executable", "args",
                     "expect_exit", "timeout_ms"})
