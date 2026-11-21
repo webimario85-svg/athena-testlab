@@ -11,6 +11,7 @@ import threading
 import time
 
 from .manifest import inside_workspace
+from . import protocol
 
 MAX_PROCESS_OUTPUT = 2 * 1024 * 1024
 
@@ -112,10 +113,14 @@ def _tcp(test: dict) -> dict:
         return {"passed": False, "observation": "tcp-unavailable"}
 
 
-def execute(test: dict, root: Path, *, allow_exec: bool) -> dict:
+def execute(test: dict, root: Path, *, allow_exec: bool,
+            allow_login_probe: bool = False) -> dict:
     start = time.monotonic()
     if test["kind"] == "process-exit":
         outcome = _process(test, root, allow_exec)
+    elif test["kind"] == "rathena-login":
+        outcome = (protocol.attempt(test) if allow_login_probe else
+                   {"passed": False, "observation": "login-probe-not-authorized"})
     else:
         outcome = _tcp(test)
     # A successful test never implies a Ragnarok protocol login.

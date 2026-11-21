@@ -18,7 +18,7 @@ RO Doctor scans Ragexe/Ragnarok-named client executables. Use --client-exe if se
 
 ## Trust boundaries
 
-A pass is a local observation only of the named TCP/process probe. It is not proof of character selection, PACKETVER compatibility, authentication, map loading or a functioning Ragnarok client. This suite format does not implement a Ragnarok login protocol handshake. RO Doctor validates hashes/log bytes, not who generated the evidence.
+A pass is a local observation only of its named scenario. In M6 the new rathena-login probe sends a genuine 0x0064 request and can prove a specifically expected server rejection (scenario rathena-account-rejected), but neither that rejection nor a response header establishes Ragexe character selection, effective PACKETVER compatibility or full gameplay. It did not authenticate a real user in upstream QA. RO Doctor validates binary hashes and log bytes, not who generated the evidence. Optional SSH attestation is separate and does not silently change the RO Doctor v1 schema.
 
 The built-in interoperability smoke uses a synthetic TCP responder and placeholder client/server binaries, not a real game login. Authentic rAthena execution requires an actual rAthena binary and separate authorized test environment.
 
