@@ -10,7 +10,7 @@ No ValkiRO/RO Doctor code or private assets in this repository. Never publish bi
 - 31/31 tests on Windows with portable smoke checks; public release tag v0.1.0.
 
 ## M6 completed on 2026-11-21
-Feature worktree: D:\athena-testlab-m6 on feat/m6-login-protocol-evidence; base 7c55a04d24bdc862addb58b4d1b9f3574830b26b. Separate main checkout: D:\athena-testlab. Confirm PR/merge/current HEAD through Git when continuing; the feature checkpoint must not predict its own commit SHA.
+Feature worktree: D:\athena-testlab-m6 on feat/m6-login-protocol-evidence; base 7c55a04d24bdc862addb58b4d1b9f3574830b26b; feature commit efddb7a79b3c2eb2a8cf187f0c773b102e3e264f. PR #1 https://github.com/webimario85-svg/athena-testlab/pull/1 merged with squash commit 873991af6908bae3d680d8c1852395141b0af135. Main checkout D:\athena-testlab. Postmerge main release preflight PASS (v0.2.0, unit tests, source syntax, JSON, wheel). Release tag v0.2.0; confirm the current tag and HEAD through Git because the checkpoint's own commit follows this text. Older M6 feature worktree retained for inspection; next milestones need a new branch/worktree.
 
 M6.1 — Actual protocol adapter
 - New rathena-login test: sends real rAthena CA_LOGIN 0x0064 55-byte request, parses AC_REFUSE_LOGIN 0x083e (or legacy 0x006a) and AC_ACCEPT_LOGIN 0x0069 headers.
