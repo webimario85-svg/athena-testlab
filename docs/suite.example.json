@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "suite_id": "rathena-local-smoke",
+  "tests": [
+    {"id": "login-port-check", "kind": "tcp-open",
+     "host": "127.0.0.1", "port": 6900, "timeout_ms": 2000},
+    {"id": "map-startup", "kind": "process-exit",
+     "executable": "map-server", "args": ["--run-once"],
+     "expect_exit": 0, "timeout_ms": 60000}
+  ]
+}
